@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ses Tanıma</title>
+  <link href="https://fonts.googleapis.com/css?family=Rajdhani" rel="stylesheet">
+
+  <link href="styles.css" rel="stylesheet">
+</head>
+
+<body>
+  <div>
+    <div class="bodyCard">
+      <div class="card">
+        <!-- Black-Hole -->
+        <svg width="0" height="0" style="margin-top: 1rem;">
+          <filter id="gooey-black-hole">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="20" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 50 -16"
+              result="goo" />
+          </filter>
+        </svg>
+        <div class="black-hole">
+          <ul class="gooey-container">
+            <li class="bubble"></li>
+            <li class="bubble"></li>
+            <li class="bubble"></li>
+            <li class="bubble"></li>
+            <li class="bubble"></li>
+            <li class="bubble"></li>
+          </ul>
+        </div>
+        <!--/Black-Hole -->
+        <br>
+        <div class="baslik">
+          <h2>Merhaba,<br>Hazır mısın?</h2>
+        </div>
+        <div class="dialog">
+          <span class="result_text"></span>
+        </div>
+        <br>
+        <button type="button" class="btn"><a>Tanımlamayı başlat</a></button>
+      </div>
+      <footer id="footer">
+        <div class="col col1">
+          <h3>Ses Tanimlama</h3>
+          <p>Made with <span style="color: #BA6573;">❤</span> ReBurak</p>
+          <p style="color: #818181; font-size: smaller">2024 © All Rights Reserved</p>
+        </div>
+        <div class="col col2">
+          <p>About</p>
+          <p>Our mission</p>
+          <p>Privacy Policy</p>
+          <p>Terms of service</p>
+        </div>
+        <div class="col col3">
+          <p>Services</p>
+          <p>Products</p>
+          <p>Join our team</p>
+          <p>Partner with us</p>
+        </div>
+        <div class="backdrop"></div>
+      </footer>
+    </div>
+  </div>
+  <script src="test.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      let ws;
+
+      const resultText = document.querySelector('.result_text');
+      const baslik = document.querySelector('.baslik');
+      const startButton = document.querySelector('.btn');
+
+      function startRecognition() {
+        ws = new WebSocket('ws://localhost:8765');
+        
+        ws.onopen = function() {
+          console.log("WebSocket bağlantısı kuruldu");
+          ws.send('start');
+        };
+
+        ws.onmessage = function(event) {
+          const message = JSON.parse(event.data);
+          console.log("Mesaj alındı:", message);
+
+          if (message.type === 'final') {
+            const words = message.text.split(' ');
+            words.forEach((word, index) => {
+              const span = document.createElement('span');
+              span.className = 'incoming_word';
+              span.textContent = word;
+              span.style.animationDelay = `${index * 0.3}s`;  // Typing effect için gecikme
+              resultText.appendChild(span);
+            });
+            baslik.style.animation = 'fadeOut 1s forwards';
+            baslik.style.display = 'none';
+            ws.close();  // Tanınan metin sonrası bağlantıyı kapat
+          }
+        };
+
+        ws.onerror = function(error) {
+          console.error('WebSocket hatası:', error);
+        };
+
+        ws.onclose = function() {
+          console.log('WebSocket bağlantısı kapatıldı');
+          // Tanıma işleminden sonra tekrar başlatmak için yeni WebSocket bağlantısı oluştur
+          setTimeout(startRecognition, 1000);  // 1 saniye bekledikten sonra yeni bağlantı başlat
+        };
+      }
+
+      startButton.addEventListener('click', () => {
+        startRecognition();
+      });
+
+      // Animasyon stilleri
+      const style = document.createElement('style');
+      style.innerHTML = `
+        @keyframes fadeOut {
+          to {
+            opacity: 0;
+            transform: scale(0);
+          }
+        }
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: scale(0);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+        @keyframes typingEffect {
+          from {
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .incoming_word {
+          display: inline-block;
+          opacity: 0;
+          animation: typingEffect 0.5s forwards;
+          margin-right: 4px;
+        }
+      `;
+      document.head.appendChild(style);
+    });
+  </script>
+</body>
+</html>

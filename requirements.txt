@@ -1,0 +1,5 @@
+json
+pyaudio
+asyncio
+vosk
+websockets

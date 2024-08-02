@@ -1,0 +1,330 @@
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Rajdhani', sans-serif;
+
+  background: #381653;
+  color: white;
+  text-align: center;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  background: linear-gradient(120deg, rgb(155, 66, 46), rgba(48, 38, 92, 0.5));
+  filter: blur(20vh);
+  animation: random-move 20s infinite alternate;
+  z-index: -1;
+}
+
+@keyframes random-move {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(-20%, -10%) rotate(45deg);
+  }
+  50% {
+    transform: translate(20%, -20%) rotate(90deg);
+  }
+  75% {
+    transform: translate(-20%, 20%) rotate(135deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(180deg);
+  }
+}
+
+
+body h1 {
+  display: block;
+  height: 25px;
+  font-size: 12px;
+}
+
+body>div {
+  min-width: 500px;
+}
+
+body>div>div {
+  margin: 0 auto;
+}
+
+@keyframes black-hole {
+  0% {
+    transform: scale(1) translate3d(75px, 0, 0);
+  }
+
+  50% {
+    transform: scale(4) translate3d(55px, 0, 0);
+  }
+
+  100% {
+    transform: scale(1) translate3d(75px, 0, 0);
+  }
+}
+
+@keyframes black-hole-rotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) skew(3deg);
+  }
+
+  50% {
+    transform: translate(-50%, -50%) rotate(180deg) skew(0deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg) skew(3deg);
+  }
+}
+
+.black-hole {
+  backface-visibility: hidden;
+  z-index: 20;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  width: 250px;
+  height: 250px;
+  padding: 0;
+  box-shadow: 0 0 30px 0 #0000ff inset;
+}
+
+.black-hole .gooey-container {
+  overflow: hidden;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(0deg) skew(5deg);
+  filter: url(#gooey-black-hole);
+  width: 300px;
+  height: 300px;
+  padding: 0;
+  margin: 0;
+  box-shadow: 0 0 0 22px #9900ff inset;
+  animation: black-hole-rotate 5s ease infinite;
+}
+
+.black-hole .gooey-container .bubble {
+  display: block;
+  position: absolute;
+  top: 70%;
+  left: 70%;
+  width: 100%;
+  text-align: left;
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.black-hole .gooey-container .bubble:before {
+  content: "";
+  display: inline-block;
+  background: #ff4081;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  transform: scale(1) translate3d(75px, 0, 0);
+  box-shadow: 0 0 10px 0 #0000ff inset, 0 0 10px 0 #0000ff inset;
+}
+
+.black-hole .gooey-container .bubble:nth-child(1):before {
+  animation: black-hole 1s ease 0.5s infinite;
+}
+
+.black-hole .gooey-container .bubble:nth-child(2):before {
+  animation: black-hole 2s ease 1s infinite;
+}
+
+.black-hole .gooey-container .bubble:nth-child(3):before {
+  animation: black-hole 3s ease 1.5s infinite;
+}
+
+.black-hole .gooey-container .bubble:nth-child(4):before {
+  animation: black-hole 4s ease 2s infinite;
+}
+
+.black-hole .gooey-container .bubble:nth-child(5):before {
+  animation: black-hole 5s ease 2.5s infinite;
+}
+
+.black-hole .gooey-container .bubble:nth-child(6):before {
+  animation: black-hole 6s ease 3s infinite;
+}
+
+
+/* CARD */
+
+:root {
+  --m: 4rem;
+}
+
+.bodyCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: -5rem;
+  color: #d5d5d5;
+  font-size: calc(0.3* var(--m));
+}
+
+h2 {
+  font-weight: 500;
+  text-align: center;
+  font-size: var(--m);
+  margin: 0;
+}
+
+h3 {
+  font-weight: 500;
+  font-size: calc(0.6 * var(--m));
+  margin: 0;
+}
+
+.card {
+  width: calc(12 * var(--m));
+  background: linear-gradient(120deg, rgba(83, 42, 32, 0.5), rgba(42, 33, 81, 0.46));
+  backdrop-filter: blur(20px);
+  color: white;
+  border-radius: calc(0.5 * var(--m));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  margin: calc(2 * var(--m)) calc(5 * var(--m)) calc(5 * var(--m)) calc(5 * var(--m));
+  padding-bottom: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+  /* Gölge efekti */
+}
+
+
+button {
+  background-color: #000;
+  font-size: calc(0.4 * var(--m));
+  border: none;
+  color: #e5e5e5;
+  font-family: "IBM Plex Sans";
+  font-weight: 400;
+  padding: calc(0.35 * var(--m)) calc(0.8 * var(--m));
+  border-radius: calc(0.3 * var(--m));
+  cursor: pointer;
+}
+
+footer {
+  margin-top: 80vh;
+  z-index: 500;
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  padding: 5rem 2vw;
+  position: relative;
+}
+
+footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0) 5%,
+      rgba(0, 0, 0, 0.3) 20%,
+      rgba(0, 0, 0, 0.6) 30%,
+      rgba(0, 0, 0, 0.8) 40%,
+      rgba(0, 0, 0, 1) 50%,
+      rgb(0, 0, 0));
+  z-index: -7;
+}
+
+.backdrop {
+  z-index: -5;
+  position: absolute;
+  inset: 0;
+
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+
+  mask-image: linear-gradient(rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0.5) 10%,
+      rgba(0, 0, 0, 0.8) 20%,
+      rgba(0, 0, 0, 1) 30%,
+      rgb(0, 0, 0));
+
+  -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0.5) 10%,
+      rgba(0, 0, 0, 0.8) 20%,
+      rgba(0, 0, 0, 1) 30%,
+      rgb(0, 0, 0));
+}
+
+.col {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: calc(0.3 * var(--m)) calc(0.8 * var(--m));
+  width: 28%;
+}
+
+.col2,
+.col3 {
+  background-color: #121212;
+  border-radius: calc(0.5 * var(--m));
+}
+
+img {
+  height: calc(0.3 * var(--m));
+  object-fit: cover;
+}
+
+.social {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.link {
+  width: calc(0.8 * var(--m));
+  height: calc(0.8 * var(--m));
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: calc(0.1 * var(--m));
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 1000px) {
+  :root {
+    --m: 3rem;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  footer {
+    flex-direction: column;
+    padding: 5rem 20vw;
+  }
+
+  .col {
+    width: 100%;
+  }
+}
+
