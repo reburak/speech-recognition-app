@@ -26,7 +26,7 @@ Bu proje, Python ve FastAPI kullanarak ses tanıma yapan bir web uygulamasıdır
 
 1. Backend sunucusunu başlatın.
     ```bash
-    python test.py
+    python app.py
     ```
 
 2. HTML dosyasını yerel bir sunucuda açın.

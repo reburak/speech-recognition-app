@@ -23,4 +23,5 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
   animateBubbles();
 }).catch(err => {
   console.error('Mikrofona erişim sağlanamadı:', err);
+  alert("Mikrofona erişim sağlanamadı");
 });
