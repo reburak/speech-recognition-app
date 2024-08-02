@@ -1,7 +1,6 @@
 # Ses Tanıma Uygulaması
 
-<img src="image.png">
-
+<img src="image.png" alt="arduino" />
 ## Türkçe
 
 Bu proje, Python ve FastAPI kullanarak ses tanıma yapan bir web uygulamasıdır. Kullanıcılar ses tanıma sonuçlarını gerçek zamanlı olarak görebilirler.
