@@ -1,5 +1,7 @@
 # Ses Tanıma Uygulaması
 
+<img src="image.png">
+
 ## Türkçe
 
 Bu proje, Python ve FastAPI kullanarak ses tanıma yapan bir web uygulamasıdır. Kullanıcılar ses tanıma sonuçlarını gerçek zamanlı olarak görebilirler.
