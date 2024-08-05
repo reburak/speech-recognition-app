@@ -41,7 +41,7 @@
           <span class="result_text"></span>
         </div>
         <br>
-        <button type="button" class="btn"><a>Tanımlamayı başlat</a></button>
+        <button class="btn"><a>Tanımlamayı başlat</a></button>
       </div>
       <footer id="footer">
         <div class="col col1">
@@ -79,6 +79,8 @@
         
         ws.onopen = function() {
           console.log("WebSocket bağlantısı kuruldu");
+          startButton.style.display = "none";
+          baslik.innerHTML = "<h2>Şimdi konuşmaya başla</h2>"
           ws.send('start');
         };
 
@@ -103,17 +105,23 @@
 
         ws.onerror = function(error) {
           console.error('WebSocket hatası:', error);
+          startButton.style.backgroundColor = "#9b9b9b";
+          startButton.style.color = "#202020";
+          startButton.innerText = "Bağlanılamadı.."
         };
 
         ws.onclose = function() {
           console.log('WebSocket bağlantısı kapatıldı');
           // Tanıma işleminden sonra tekrar başlatmak için yeni WebSocket bağlantısı oluştur
-          setTimeout(startRecognition, 1000);  // 1 saniye bekledikten sonra yeni bağlantı başlat
+          setTimeout(startRecognition);  // 1 saniye bekledikten sonra yeni bağlantı başlat
         };
       }
 
       startButton.addEventListener('click', () => {
         startRecognition();
+        startButton.style.backgroundColor = "crimson";
+          startButton.style.color = "#fff";
+          startButton.innerText = "Bağlanmaya çalışıyor.."
       });
 
       // Animasyon stilleri

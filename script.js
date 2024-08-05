@@ -13,7 +13,7 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
       const average = dataArray.reduce((sum, value) => sum + value, 0) / bufferLength;
       
       document.querySelectorAll('.bubble').forEach(bubble => {
-          const scale = Math.min(1 + average / 128, 2); // Ortalama değeri ölçek olarak kullan
+          const scale = Math.min(1 + average / 128, 3); // Ortalama değeri ölçek olarak kullan
           bubble.style.transform = `scale(${scale})`;
       });
 

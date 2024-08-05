@@ -221,6 +221,11 @@ button {
   cursor: pointer;
 }
 
+.dialog {
+   padding: 1rem;
+   font-size: 2rem;
+}
+
 footer {
   margin-top: 80vh;
   z-index: 500;
